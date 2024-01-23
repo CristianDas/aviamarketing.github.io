@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Página</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="./CSS/style2.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://cdn.rawgit.com/googlemaps/js-marker-clusterer/gh-pages/src/markerclusterer.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+
+</head>
+
+<body>
+    <p id="precio-info"></p>
+
+    <header>
+        <img src="./IMG/hoteles-1920h.jpg" alt="Imagen de encabezado">
+    </header>
+
+    <div class="menu">
+        <button class="close-btn" id="close-map-btn" onclick="closeMapOnMobile()">
+            <i class="fa-solid fa-circle-xmark"></i> 
+        </button>
+
+        <div class="acordeon">
+            <p><i class="glyphicon glyphicon-tasks" id="icono-filtro" style="color: #1a4a8c;"></i>Filtros</p>
+        </div>
+        <div class="encontrados"><p>189 Hoteles Encontrados</p>
+        </div>            
+    </div>    
+    <main>                     
+        <div class="container">
+            <div id="map-container">
+            </div>
+            <div class="contenedormedio">
+                <div id="hotel-container">
+                    <div class="hotel">
+                        <img src="./IMG/HotelFour.jpg" alt="Imagen de encabezado" id="imghotel">
+                        
+                        <div class="h-container">
+    
+                        </div>
+                    </div>
+                    <div class="hotel">
+                        <h3>Hotel 2</h3>
+                        <p></p>
+                    </div>
+                    <div class="hotel">
+                        <h3>Hotel 3</h3>
+                        <p></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="filtros-container" id="filtrosCon">
+                <div id="show-map-btn" onclick="toggleMap()">
+                    <span>Mapa</span>
+                    <i class="fas fa-chevron-down" id="iconoMap"></i>
+                </div>
+                <div class="filtro" onclick="">
+                    <span>Hotel</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="filtro">
+                    <span>Precio por Noche</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+                <div class="filtro">    
+                    <span>Categoria</span>
+                    <i class="fas fa-chevron-down"></i>
+                </div>
+            </div>
+        </div>
+    </main>
+<script>
+
+var hotels;
+        var map;
+        var openInfoWindow;
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map-container'), {
+                center: { lat: 4.71363432452102, lng: -74.06902963184557 },
+                zoom: 12
+            });
+
+hotels = [
+// hotels
+  ];  
+  
+
+  function getMarkerLabel(hotel) {
+  return '<img src="./IMG/cama.png" alt="Cama Icon" /> ' + h.price;
+}
+var infowindow = new google.maps.InfoWindow();
+
+
+
+hotels.forEach(function (h) {
+    var marker;
+
+    if (h.stars >= 4) {
+        marker = new google.maps.Marker({
+            position: h.location,
+            map: map,
+            title: h.name,
+            label: {
+                className: 'map-marker-label',
+                text: h.price,
+                color: 'white',
+                fontSize: '1.2rem',
+            },
+            icon: {
+                url: "./IMG/burbuja-de-dialogo.png",
+                scaledSize: new google.maps.Size(80, 40),
+                
+            },
+        });
+    } else {
+        marker = new google.maps.Marker({
+            position: h.location,
+            map: map,
+            title: h.name,
+            icon: {
+                url: "./IMG/cama-oculta.png",
+                scaledSize: new google.maps.Size(22, 22),
+            },
+        });
+        marker.addListener("mouseout", function () {
+            marker.setIcon({
+                url: "./IMG/cama-oculta.png",
+                scaledSize: new google.maps.Size(22, 22),
+            });
+            marker.setLabel(null); 
+        });
+    }
+    
+
+        
+
+
+   
+var contentString = 
+        '<div id="info-window-content" >' +
+        '<div class="close-btn-container"><button class="close-btn" onclick="closeInfoWindow(event)"><i class="fa-solid fa-circle-xmark"></i></i></button></div>' +
+        '<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">' +
+        '<ol class="carousel-indicators"></ol>' +
+        '<div class="carousel-inner"></div>' +
+        '<a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">' +
+        '<span class="carousel-control-prev-icon" aria-hidden="true"></span>' +
+        '<span class="sr-only">Previous</span></a>' +
+        '<a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">' +
+        '<span class="carousel-control-next-icon" aria-hidden="true"></span>' +
+        '<span class="sr-only">Next</span></a></div>' +
+        '<div class="hotel-descripcion"><h3 id="name-hotel">' + h.name + '</h3>' +
+        '<p id="stars-info">' + getStarsHtml(h.stars) + '</p>' +
+        '<p id="precio-info">'+ h.price +'/'+ '<span style="font-size: 1.3rem;">noche</span></p>' +
+        '</div></div></div></a>';
+
+        google.maps.event.addListener(marker, 'click', function () {
+        if (openInfoWindow) {
+            openInfoWindow.close();
+        }
+
+        openInfoWindow = infowindow;
+        infowindow.setContent(contentString);
+        infowindow.open(map, marker);
+
+        google.maps.event.addListenerOnce(infowindow, 'domready', function () {
+            var carouselIndicators = $('#carouselExampleIndicators .carousel-indicators');
+            var carouselInner = $('#carouselExampleIndicators .carousel-inner');
+
+            h.images.forEach(function (image, index) {
+                carouselIndicators.append('<li data-target="#carouselExampleIndicators" data-slide-to="' + index + '" ' + (index === 0 ? 'class="active"' : '') + '></li>');
+                carouselInner.append('<div class="carousel-item ' + (index === 0 ? 'active' : '') + '">' +
+                    '<img src="' + image + '" class="d-block w-100" style="max-height: 150px; max-width: 100%; object-fit: cover;" alt="Hotel Image"></div>');
+            });
+        });
+    });
+
+
+    marker.addListener("mouseover", function () {
+        marker.setIcon({
+            url: "./IMG/burbuja-de-dialogo (1).png",
+            scaledSize: new google.maps.Size(90, 40),
+        });
+        marker.setLabel({
+            className: 'map-marker-label',
+            text: h.price, 
+            color: 'white',
+            fontSize: '1.2rem',
+        });
+ 
+    });
+
+ if (h.stars>=4) {
+    marker.addListener("mouseout", function () {
+        marker.setIcon({
+            url: "./IMG/burbuja-de-dialogo.png",
+            scaledSize: new google.maps.Size(80, 40),
+        });
+    });    
+ } else {
+    marker.addListener("mouseout", function () {
+        marker.setIcon({
+            url: "./IMG/cama-oculta.png",
+            scaledSize: new google.maps.Size(22, 22),
+        });
+    });   
+
+    marker.setLabel({
+            className: 'map-marker-label',
+            color: 'blue',
+            fontSize: '1.2rem',
+        });
+ }
+});
+
+
+    openInfoWindow = infowindow;
+    infowindow.setContent(contentString);
+    infowindow.open(map, marker);
+
+
+
+    google.maps.event.addListenerOnce(infowindow, 'domready', function () {
+        var carouselIndicators = $('#carouselExampleIndicators .carousel-indicators');
+        var carouselInner = $('#carouselExampleIndicators .carousel-inner');
+
+        h.images.forEach(function (image, index) {
+            carouselIndicators.append('<li data-target="#carouselExampleIndicators" data-slide-to="' + index + '" ' + (index === 0 ? 'class="active"' : '') + '></li>');
+            carouselInner.append('<div class="carousel-item ' + (index === 0 ? 'active' : '') + '">' +
+                '<img src="' + image + '" class="d-block w-100" style="max-height: 150px; max-width: 100%; object-fit: cover;" alt="Hotel Image"></div>');
+        });
+    });
+        }
+
+function closeInfoWindow(event) {
+    if (event) {
+
+        event.stopPropagation();
+    }
+    if (openInfoWindow) {
+        openInfoWindow.close();
+    }
+}
+
+
+function toggleMap() {
+    var mapContainer = document.getElementById('map-container');
+    var containerFiltro = document.getElementById('filtrosCon');
+
+    if (mapContainer.style.height === '0px' || !mapContainer.style.height) {
+        mapContainer.style.height = '450px';
+        containerFiltro.style.transform = 'translateY(0)';
+        initMap();
+    } else {
+        mapContainer.style.height = '0';
+        containerFiltro.style.transform = 'translateY(-0%)';
+        containerFiltro.style.transform = 'translateY(0)';
+        containerFiltro.style.transition = 'all 0.7s ease-out';
+        mapContainer.style.transform = 'translate(49%, 0px)';
+    }
+}
+function closeMapOnMobile() {
+    var mapContainer = document.getElementById('map-container');
+    var containerFiltro = document.getElementById('filtrosCon');
+
+    mapContainer.style.height = '0';
+    containerFiltro.style.transform = 'translateY(-0%)';
+    containerFiltro.style.transform = 'translateY(0)';
+    containerFiltro.style.transition = 'all 0.7s ease-out';
+    mapContainer.style.transform = 'translate(49%, 0px)';
+}
+
+function getStarsHtml(starCount) {
+    var starsHtml = '';
+    for (var i = 0; i < starCount; i++) {
+        starsHtml += '<i class="fas fa-star"></i>';
+    }
+    return starsHtml;
+}
+
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDO2wIp1Djj9W8cur7od8bHV9VzE  LD4tFA&callback=initMap"
+    async defer></script>
+</body>
+
+</html>
+

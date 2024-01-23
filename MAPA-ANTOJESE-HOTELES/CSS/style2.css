@@ -1,0 +1,555 @@
+* {
+	font-family: system-ui, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+	box-sizing: border-box;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	-webkit-tap-highlight-color: transparent;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    width: 100%;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+header img {
+    width: 100%;
+    height: auto;
+}
+
+.custom-label-container {
+    background-color: #1a4a8c;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.custom-label {
+    font-size: 1.4rem;
+}
+
+
+.menu {
+    display: flex;
+    position: relative;
+    top: 20px;
+    width: 90%;
+    height: 60px;
+    box-shadow: 7px 7px 15px 2px rgba(200,200,200,.5);
+    border: 0.1px solid #f1efef;
+    
+}
+
+#icono-filtro{
+    position: relative;
+    font-size: 19px;
+    padding: 5px;
+}
+
+.acordeon{
+    position: relative;
+    width: 22%;
+    top: 24%;
+    left: 9%;
+}
+
+.encontrados{
+    position: relative;
+    color: #1a4a8c;
+    font-weight: 650;
+    font-size: 20px;
+    font-style: normal;
+    width: 30%;
+    top: 30%;
+    left: 9%;
+}
+
+
+main {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 1200px;
+    padding: 0px;
+    position: relative;
+    z-index: 1;
+   
+}
+
+#map-container {
+    position: relative;
+    top: 20px;
+    left: 0%;
+    display: flex;
+    flex-direction: column;
+    width: 70%;
+    transform: translate(49%, 0px);
+    height: auto;
+    overflow: visible;
+    border: 0px solid #ccc;
+    margin-bottom: 20px;
+    transition: all 0.7s ease-out;
+    align-items: flex-end;
+    padding: 0px;
+    z-index: 2; 
+}
+
+#expand-map-btn {
+cursor: pointer;
+text-decoration: none;
+width: 40px;
+height: 40px;
+box-sizing: border-box;
+background-color: #ccc;
+border: 1px solid #ccc;
+padding: 10px;
+display: flex;
+align-items: center;
+justify-content: center;
+position: absolute;
+bottom: 10px;
+right: 10px;
+z-index: 2; /* Asegura que el botón esté encima del mapa */
+border-radius: 50%;
+}
+
+#expand-map-btn i {
+    color: #333;
+}
+
+#hotel-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    padding: 10px;
+}
+
+.hotel {
+    position: relative;
+    box-shadow: 4px 4px 10px rgb(173, 160, 160);
+    width: 70%;
+    height: 235px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 0px;
+    left: 5%;
+    
+}
+
+#show-map-btn {
+    cursor: pointer;
+    text-decoration: underline;
+    margin-bottom: 10px;
+    width: 25%;
+    height: 60px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#show-map-btn i {
+    margin-right: 10px;
+    
+}
+
+.filtro,
+#show-map-btn {
+    text-decoration: none;
+    width: 100%;
+    height: 50px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    box-shadow: 4px 4px 10px rgb(173, 160, 160);
+    margin: 10px;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 4px;
+    font-size: 17px;
+    font-weight: bold;
+    color: rgb(26, 74, 140);
+}
+
+.filtro i ,#iconoMap{
+    font-size: 20px;
+    margin-right: 10px;
+    color: #00bdd6;
+}
+
+
+
+.filtros-container {
+    position: absolute;
+    top: 55px;
+    left: 5%;
+    width: 300px;
+    transition: all 0.20 ease-out;
+    z-index: 1;
+}
+
+i {
+    color: #febb02;
+}
+
+#imghotel {
+    width: 45%;
+    height: 100%;
+}
+
+
+.iconoMap{
+    z-index: 1;
+}
+
+
+.custom-marker {
+    background-color: #1a4a8c;
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+
+
+.prec{
+    background-color: #1a4a8c;
+    width: 100px;
+    height: 100px;
+}
+
+#info-window-content{
+ padding: 0%;
+ width: 288px;
+}
+
+
+.hotel-descripcion{
+padding: 5px;
+}
+
+#text{
+    padding: 0;
+    margin: 0;
+}
+
+#precio-info{
+  padding: 0;
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#name-hotel{
+  font-size: 14px;
+  display: block;
+  height: 16px;
+  line-height: 16px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin: 0;
+}
+
+#stars-info{
+  padding: 0;
+  margin: 6px;
+}
+
+.gm-style .gm-style-iw-c {
+    padding: 0PX;
+    font-size: 11px;
+}
+
+#carouselExampleIndicators img {
+    max-height: 1px;
+    max-width: 100%;
+    object-fit: cover;
+}
+
+#carouselExampleIndicators {
+    max-height: 150px;
+    overflow: hidden;
+}
+.carousel-indicators {
+    bottom: 0px;
+  }
+
+.close-btn-container {
+    z-index: 2;
+    position: absolute;
+    top: 5px;
+    right: 1%;    
+}
+
+
+
+.close-btn {
+    z-index: 2;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.close-btn i {
+    z-index: 2;
+    border-radius: 55px;
+    font-size: 25px;
+    color: rgb(240, 230, 230);
+}
+
+
+
+.map-marker-label {
+    position: relative;
+    top: -3px;
+    left: 0px;
+    z-index: 100;
+    font-weight: 900;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+
+
+.carousel-indicators{
+margin-bottom: 0;
+}
+
+.gm-ui-hover-effect{
+    opacity: 0;
+    display: none;
+}
+
+#close-map-btn {
+    display: none; 
+    z-index: 2;
+    border-radius: 55px;
+    font-size: 25px;
+    color: rgb(240, 230, 230);/* Inicialmente oculto */
+        z-index: 2;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+/* Mostrar el botón solo en versiones móviles */
+@media (max-width: 900px) {
+    #close-map-btn {
+        display: block;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 2000;
+    }
+}
+
+
+
+/* responsive */
+
+/*
+    @media only screen and (min-width:1750px) and (max-width:1920px){
+        .filtros-container {
+            width: 400px;
+            left: -190px;
+          }
+         
+          .filtro,
+      #show-map-btn {
+          height: 70px;
+          font-size: 23px;
+      }
+      
+          #map-container {
+              left: -250px;
+               width: 100%;
+          }
+      
+          .hotel{
+             position: relative;
+             width: 100%;
+             left: 300px;
+          }
+      
+          #info-window-content{
+              width: 350px;
+              font-size: 17px;
+      
+          }
+      
+          #precio-info{
+              font-size: 25px;
+            }
+      
+            #name-hotel{
+              font-size: 17px;
+            }
+
+       }*/ 
+
+        @media only screen and (min-width:1700px) and (max-width:1920px){
+            .filtros-container {
+                width: 300px;
+              }
+
+            .hotel{
+                position: relative;
+                width: 73%;
+                left: 110px;
+             }
+    
+
+             #map-container {
+                 width: 73%;
+            }
+            }
+
+            .encontrados{
+                left: 300px;
+            }
+            .acordeon{
+                left: 18%;
+            }
+
+
+
+        @media only screen and (min-width:1000px) and (max-width:1300px){
+            .filtros-container {
+                width: 250px;
+              }
+            #map-container {
+                left: -40px;
+                 width: 70%;
+            }
+
+
+            .hotel{
+                position: relative;
+                width: 70%;
+                left: 10px;
+             }
+             .encontrados{
+                left: 100px;
+            }
+            .acordeon{
+                position: relative;
+                width: 22%;
+                top: 24%;
+                left: 5%;
+            }
+
+
+
+
+                }
+            
+                @media only screen and (min-width:100px) and (max-width:1000px){
+                    .filtros-container {
+                        display: none;
+                      }
+                      
+                    #map-container {
+                        left: -50%;
+                         width: 100%;
+                    }
+
+                    #info-window-content{
+                        padding: 0%;
+                        width: 190px;
+                       }
+
+                       #precio-info{
+                        font-size: 16px;
+                        font-weight: bold;
+                      }
+                      #name-hotel{
+                        font-size: 12px;
+
+                      }
+                      
+                      #stars-info{
+                        padding: 0;
+                        margin: 6px;
+                        font-size: 10px;
+                      }
+        
+                    .hotel{
+                        position: relative;
+                        left: -0%;
+                         width: 100%;
+                     }
+                     
+                     .encontrados{
+                        display: none;
+                     }
+
+                     .acordeon{
+                        left: 0%;
+                      }
+
+                      #carouselExampleIndicators img {
+                        max-height: 1px;
+                        max-width: 100%;
+                        object-fit: cover;
+                    }
+                    
+                    #carouselExampleIndicators {
+                        max-height: 120px;
+                        overflow: hidden;
+                    }
+
+                    .map-marker-label {
+
+                        font-size: 10rem;
+                    }
+                        }
+
+                        @media only screen and (min-width:2000px) and (max-width:2500px){
+                           
+                          .encontrados{
+                            left: 20%;
+                          }
+
+                          .acordeon{
+                            left: 22%;
+                          }
+                             
+                            
+                                }
+        
+                         @media only screen and (min-width:1300px) and (max-width:1700px){
+                           
+                                    .encontrados{
+                                      left: 15%;
+                                    }
+          
+                                    .acordeon{
+                                      left: 10%;
+                                    }
+                                       
+                                      
+                                          }
+                                          @media screen and (min-width: 768px) {
+                                            .carousel-indicators {
+                                              bottom: 0px;
+                                            }
+                                          }
+
